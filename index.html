@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Frontend v1.0</title></head>
+<head><meta charset="UTF-8"><title>Frontend v2.0</title></head>
 <body>
     <h1>Отправка текста</h1>
     <input id="text" placeholder="Введите текст">
     <button onclick="send()">Отправить</button>
     <p id="msg"></p>
+
+    <h2>Чтение из файла</h2>
+    <button onclick="read()">Показать данные</button>
+    <textarea id="out" rows="5" cols="30" readonly></textarea>
 
     <script>
         async function send() {
@@ -17,6 +21,12 @@
             });
             const data = await res.json();
             document.getElementById('msg').innerText = data.message;
+        }
+
+        async function read() {
+            const res = await fetch('http://localhost:5000');
+            const data = await res.json();
+            document.getElementById('out').value = data.content;
         }
     </script>
 </body>
