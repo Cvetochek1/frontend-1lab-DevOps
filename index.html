@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Frontend v1.0</title></head>
+<body>
+    <h1>Отправка текста</h1>
+    <input id="text" placeholder="Введите текст">
+    <button onclick="send()">Отправить</button>
+    <p id="msg"></p>
+
+    <script>
+        async function send() {
+            const text = document.getElementById('text').value;
+            const res = await fetch('http://localhost:5000', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: text})
+            });
+            const data = await res.json();
+            document.getElementById('msg').innerText = data.message;
+        }
+    </script>
+</body>
+</html>
